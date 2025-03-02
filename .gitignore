@@ -1,3 +1,7 @@
 # Ignore data files
 data/*
 output_data/*
+/local_data/*.jsonl
+/project3/local_data/*.jsonl
+
+/project3/local_data/*
