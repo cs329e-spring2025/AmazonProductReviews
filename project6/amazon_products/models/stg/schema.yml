@@ -1,0 +1,28 @@
+version: 2
+
+sources:
+  - name: product_data_raw
+    database: amazon-product-reviews-452322
+    schema: product_data_raw
+    tables:
+      - name: amazon_prime_users
+      - name: Products_Meta_Appliances
+      - name: Products_Meta_Automotive
+      - name: Products_Meta_Books
+      - name: Products_Meta_Digital_Music
+      - name: Products_Meta_Gift_Cards
+      - name: Products_Meta_Magazine_Subscriptions
+      - name: Products_Meta_Movies_And_Tv
+      - name: reviews_Appliances
+      - name: reviews_Automotive
+      - name: reviews_Books
+      - name: reviews_Digital_Music
+      - name: reviews_Gift_Cards
+      - name: reviews_Magazine_Subscriptions
+      - name: reviews_Movies_and_TV
+      - name: user
+      - name: product_meta_data_2
+      - name: categories
+      - name: product-image-data-all
+      # - name: Product_Meta_Data
+      # - name: tmp_pmd2

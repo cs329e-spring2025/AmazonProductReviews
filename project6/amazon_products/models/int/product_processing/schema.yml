@@ -1,0 +1,123 @@
+version: 2
+
+models:
+  - name: tmp_product_meta_data_cleaned
+    description: "Cleans selling_price and enhances product_specification from stg_product_meta_data_2."
+
+  - name: tmp_product_meta_data_transformed
+    description: "Renames columns, sets NULLs, and builds details string for product source 2."
+
+  - name: int_product_meta_data_merged
+    description: "Intermediate SQL model that merges product metadata from different sources and deduplicates."
+    config:
+      contract:
+        enforced: true
+    columns:
+      - name: parent_asin
+        description: "Parent ASIN of the product."
+        data_type: string
+      - name: main_category
+        description: "Main category extracted or assigned."
+        data_type: string
+      - name: title
+        description: "Product title."
+        data_type: string
+      - name: average_rating
+        description: "Average customer rating."
+        data_type: float64
+      - name: rating_number
+        description: "Total number of ratings."
+        data_type: int64
+      - name: features
+        description: "Product features listed, often as a string."
+        data_type: string
+      - name: description
+        description: "Product description."
+        data_type: string
+      - name: price
+        description: "Product price."
+        data_type: float64
+      - name: store
+        description: "Store or seller information."
+        data_type: string
+      - name: images_str
+        description: "Comma-separated string representation of image URLs."
+        data_type: string
+      - name: videos_str
+        description: "Comma-separated string representation of video URLs."
+        data_type: string
+      - name: categories_str
+        description: "Comma-separated string representation of product categories."
+        data_type: string
+      - name: details
+        description: "Concatenated details string."
+        data_type: string
+      - name: bought_together
+        description: "Information on products frequently bought together."
+        data_type: string
+      - name: _data_source
+        description: "Originating source file or system for the merged record."
+        data_type: string
+      - name: _load_time
+        description: "Timestamp when the source data for the merged record was loaded."
+        data_type: timestamp
+
+  - name: int_product_meta_data_merged_pk
+    description: "Final intermediate product metadata table with a generated surrogate primary key (product_metadata_pk)."
+    columns:
+      - name: product_metadata_pk
+        description: "Unique surrogate primary key for the merged product metadata."
+        data_type: string
+        tests:
+          - unique
+          - not_null
+
+      - name: parent_asin
+        description: "Parent ASIN of the product."
+        data_type: string
+      - name: main_category
+        description: "Main category extracted or assigned."
+        data_type: string
+      - name: title
+        description: "Product title."
+        data_type: string
+      - name: average_rating
+        description: "Average customer rating."
+        data_type: float64
+      - name: rating_number
+        description: "Total number of ratings."
+        data_type: int64
+      - name: features
+        description: "Product features listed, often as a string."
+        data_type: string
+      - name: description
+        description: "Product description."
+        data_type: string
+      - name: price
+        description: "Product price."
+        data_type: float64
+      - name: store
+        description: "Store or seller information."
+        data_type: string
+      - name: images_str
+        description: "Comma-separated string representation of image URLs."
+        data_type: string
+      - name: videos_str
+        description: "Comma-separated string representation of video URLs."
+        data_type: string
+      - name: categories_str
+        description: "Comma-separated string representation of product categories."
+        data_type: string
+      - name: details
+        description: "Concatenated details string."
+        data_type: string
+      - name: bought_together
+        description: "Information on products frequently bought together."
+        data_type: string
+      - name: _data_source
+        description: "Originating source file or system for the merged record."
+        data_type: string
+      - name: _load_time
+        description: "Timestamp when the source data for the merged record was loaded."
+        data_type: timestamp
+

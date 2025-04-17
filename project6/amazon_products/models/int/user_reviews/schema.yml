@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: int_user_reviews
+    description: "Intermediate model containing user reviews and ratings."
+    config:
+      contract:
+        enforced: true
+    constraints:
+      - type: primary_key
+        columns: [review_id]
+
+    columns:
+      - name: user_id
+        description: "Unique identifier for the user (PK)."
+        data_type: string
+        tests:
+          - not_null
+      - name: review_id
+        description: "Unique identifier for the review (PK)."
+        data_type: string
+        tests:
+          - unique
+          - not_null
+        relationship:
+          - to: ref('int_product_reviews')
+            field: review_id

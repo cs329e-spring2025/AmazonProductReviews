@@ -1,0 +1,223 @@
+version: 2
+
+models:
+  - name: int_product_image_data
+    description: "Intermediate model consolidating product attributes and detailed image analysis data."
+    tests:
+      - unique:
+          column_name: image_path
+    columns:
+      - name: review_id
+        description: "Identifier potentially linking to a review."
+        data_type: string
+
+      - name: asin
+        description: "Amazon Standard Identification Number."
+        data_type: string
+        tests:
+          - relationships:
+              to: ref('int_product_meta_data_merged')
+              field: parent_asin
+
+      - name: parent_asin
+        description: "Parent ASIN, potentially grouping product variants."
+        data_type: string
+
+      - name: variant
+        description: "Product variant information, if applicable."
+        data_type: string
+
+      - name: brand_name
+        description: "Brand name of the product."
+        data_type: string
+
+      - name: product_name
+        description: "Name of the product."
+        data_type: string
+
+      - name: Main_Category
+        description: "Main category classification."
+        data_type: string
+
+      - name: Subcategory_1
+        description: "First level subcategory."
+        data_type: string
+
+      - name: Subcategory_2
+        description: "Second level subcategory."
+        data_type: string
+
+      - name: Subcategory_3
+        description: "Third level subcategory."
+        data_type: string
+
+      - name: Subcategory_4
+        description: "Fourth level subcategory."
+        data_type: string
+
+      - name: Subcategory_5
+        description: "Fifth level subcategory."
+        data_type: string
+
+      - name: list_price
+        description: "Original listed price of the product (as string)."
+        data_type: string
+
+      - name: selling_price
+        description: "Actual selling price of the product (as string)."
+        data_type: string
+
+      - name: about_product
+        description: "Descriptive text about the product."
+        data_type: string
+
+      - name: product_technical
+        description: "Technical details about the product."
+        data_type: string
+
+      - name: url
+        description: "URL link related to the product."
+        data_type: string
+
+      - name: detected_text
+        description: "Text detected within the product image."
+        data_type: string
+
+      - name: dominant_colors
+        description: "Dominant colors detected in the product image."
+        data_type: string
+
+      - name: object_features
+        description: "Features or objects detected in the product image."
+        data_type: string
+
+      - name: logo_detection
+        description: "Detected logos in the product image."
+        data_type: string
+
+      - name: text_sentiment
+        description: "Sentiment analysis score or label for detected text."
+        data_type: string
+
+      - name: object_detection
+        description: "Detected objects and their bounding boxes/scores."
+        data_type: string
+
+      - name: image_quality_clarity
+        description: "Metric for image clarity/sharpness."
+        data_type: string
+
+      - name: image_quality_lighting
+        description: "Metric for image lighting quality."
+        data_type: string
+
+      - name: image_quality_watermarks
+        description: "Flag or metric indicating presence of watermarks."
+        data_type: string
+
+      - name: product_condition
+        description: "Condition of the product as inferred from the image (e.g., new, used)."
+        data_type: string
+
+      - name: packaging_type
+        description: "Type of packaging shown in the image."
+        data_type: string
+
+      - name: target_demographic
+        description: "Inferred target demographic based on image context."
+        data_type: string
+
+      - name: competitor_products
+        description: "Detected competitor products in the image background/context."
+        data_type: string
+
+      - name: background_type
+        description: "Type of background in the image (e.g., plain, lifestyle)."
+        data_type: string
+
+      - name: product_completeness
+        description: "Whether the full product appears to be shown."
+        data_type: string
+
+      - name: viewing_angles
+        description: "Description of the product viewing angle shown."
+        data_type: string
+
+      - name: scale_reference
+        description: "Presence of an object providing scale reference."
+        data_type: string
+
+      - name: assembly_stage
+        description: "Whether the product is shown assembled or disassembled."
+        data_type: string
+
+      - name: promotional_badges
+        description: "Presence of promotional text/badges (e.g., 'Sale', 'New')."
+        data_type: string
+
+      - name: comparative_elements
+        description: "Presence of elements comparing the product to others."
+        data_type: string
+
+      - name: certifications
+        description: "Visible certifications or compliance marks."
+        data_type: string
+
+      - name: seasonal_theme
+        description: "Presence of a seasonal theme in the image."
+        data_type: string
+
+      - name: special_edition
+        description: "Indication if the product is a special edition."
+        data_type: string
+
+      - name: interface_visibility
+        description: "Visibility of product interfaces/screens (if applicable)."
+        data_type: string
+
+      - name: controls_shown
+        description: "Whether product controls (buttons, knobs) are clearly shown."
+        data_type: string
+
+      - name: ergonomic_highlights
+        description: "Highlighting of ergonomic features."
+        data_type: string
+
+      - name: accessories_shown
+        description: "Whether included accessories are shown."
+        data_type: string
+
+      - name: usage_environment
+        description: "The environment where the product is shown being used."
+        data_type: string
+
+      - name: color_harmony_score
+        description: "Score related to the harmony of colors in the image."
+        data_type: string
+
+      - name: style_classification
+        description: "Classification of the image's photographic style."
+        data_type: string
+
+      - name: visual_complexity
+        description: "Metric for the visual complexity of the image."
+        data_type: string
+
+      - name: symmetry_score
+        description: "Score related to the symmetry of the composition."
+        data_type: string
+
+      - name: focal_area
+        description: "Description of the main focal area of the image."
+        data_type: string
+
+      - name: image_path
+        description: "Path or URL to the product image file (Assumed PK)."
+        data_type: string
+        tests:
+          - not_null
+
+      - name: analysis_timestamp
+        description: "Timestamp when the image analysis was performed."
+        data_type: string
+

@@ -1,0 +1,8 @@
+version: 2
+sources:
+  - name: product_data_int
+    database: amazon-product-reviews-452322
+    schema: product_data_int
+    tables:
+      - name: User_Reviews
+      - name: Product_Reviews

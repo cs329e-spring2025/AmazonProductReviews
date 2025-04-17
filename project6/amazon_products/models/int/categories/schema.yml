@@ -1,0 +1,60 @@
+version: 2
+
+models:
+  - name: int_categories
+    description: "Intermediate table defining the flattened product category hierarchy. Uniqueness is defined by the combination of all category levels."
+    config:
+      contract:
+        enforced: true
+    columns:
+      - name: main_category
+        description: "Top-level category name (Part of composite PK)."
+        data_type: string
+        tests:
+          - not_null
+          # - relationships:
+          #     to: ref('int_product_meta_data_merged')
+          #     field: main_category
+      - name: subcategory_1
+        description: "First level subcategory name (Part of composite PK)."
+        data_type: string
+      - name: subcategory_2
+        description: "Second level subcategory name (Part of composite PK)."
+        data_type: string
+      - name: subcategory_3
+        description: "Third level subcategory name (Part of composite PK)."
+        data_type: string
+      - name: subcategory_4
+        description: "Fourth level subcategory name (Part of composite PK)."
+        data_type: string
+      - name: subcategory_5
+        description: "Fifth level subcategory name (Part of composite PK)."
+        data_type: string
+      - name: subcategory_6
+        description: "Sixth level subcategory name (Part of composite PK)."
+        data_type: string
+      - name: subcategory_7
+        description: "Seventh level subcategory name (Part of composite PK)."
+        data_type: string
+      - name: subcategory_8
+        description: "Eighth level subcategory name (Part of composite PK)."
+        data_type: string
+      - name: _data_source
+        description: "Originating source."
+        data_type: string
+      - name: _load_time
+        description: "Staging load time."
+        data_type: timestamp
+
+    tests:
+      - unique_combination_of_columns: 
+          combination_of_columns:
+            - main_category
+            - subcategory_1
+            - subcategory_2
+            - subcategory_3
+            - subcategory_4
+            - subcategory_5
+            - subcategory_6
+            - subcategory_7
+            - subcategory_8

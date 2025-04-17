@@ -1,0 +1,63 @@
+version: 2
+
+models:
+  - name: int_user_info
+    description: "Intermediate model containing core user profile information."
+    config:
+      contract:
+        enforced: true
+    constraints:
+      - type: primary_key
+        columns: [user_id]
+    columns:
+      - name: user_id
+        description: "Unique identifier for the user (PK)."
+        data_type: string
+        tests:
+          - unique
+          - not_null
+        relationships:
+          - to: ref('int_user_info')
+            field: user_id
+
+      - name: name
+        description: "User's full name."
+        data_type: string
+      - name: email_address
+        description: "User's email address."
+        data_type: string
+      - name: date_of_birth
+        description: "User's date of birth."
+        data_type: date
+      - name: gender
+        description: "User's gender."
+        data_type: string
+      - name: location
+        description: "User's location."
+        data_type: string
+      - name: usage_frequency
+        description: "How often the user uses the service."
+        data_type: string
+      - name: purchase_history
+        description: "Summary or details of user's purchase history."
+        data_type: string
+      - name: favorite_genres
+        description: "User's preferred genres."
+        data_type: string
+      - name: devices_used
+        description: "Devices used by the user."
+        data_type: string
+      - name: engagement_metrics
+        description: "Metrics related to user engagement."
+        data_type: string
+      - name: feedback_ratings
+        description: "User feedback ratings provided."
+        data_type: float64
+      - name: customer_support_interactions
+        description: "Count or details of support interactions."
+        data_type: int64
+      - name: _data_source
+        data_type: string
+      - name: _load_time
+        data_type: timestamp
+

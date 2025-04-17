@@ -1,0 +1,35 @@
+version: 2
+models:
+  - name: int_user
+    description: "Definitive intermediate user table, derived from stg_user."
+    config:
+      contract:
+        enforced: true
+    constraints:
+      - type: primary_key
+        columns: [user_id]
+    columns:
+      - name: user_id
+        description: "Unique identifier for the user (PK)."
+        data_type: string
+        tests:
+          - unique
+          - not_null
+        relationpship:
+          - to: ref('int_user_reviews')
+            field: user_id
+      - name: username
+        description: "Username associated with the user."
+        data_type: string
+        tests:
+          - not_null
+      - name: review_id
+        description: "Identifier for a review associated with this user entry (May need reconsideration if this is the main user dimension)."
+        data_type: int64
+      - name: _data_source
+        description: "Originating source file or system."
+        data_type: string
+      - name: _load_time
+        description: "Timestamp when the data was loaded into the raw layer."
+        data_type: timestamp
+

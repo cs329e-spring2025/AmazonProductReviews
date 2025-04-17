@@ -1,0 +1,82 @@
+version: 2
+
+models:
+  - name: int_product_reviews
+    description: "Consolidated product reviews from various categories, unioned from staging tables. Assumes PK is (user_id, asin, review_date)."
+    tests:
+      - unique_combination_of_columns:
+          combination_of_columns:
+            - review_id
+    columns:
+      - name: review_id
+        description: "Unique identifier for each review record (generated surrogate key)."
+        data_type: string
+        tests:
+          - unique
+          - not_null
+        relationships:
+          - to: ref('int_product_image_data')
+            field: review_id
+
+      - name: rating
+        description: "Numeric rating given by the reviewer (e.g., 1.0-5.0)."
+        data_type: float64
+      - name: title
+        description: "Title of the review."
+        data_type: string
+
+      - name: text
+        description: "Text content of the review."
+        data_type: string
+
+      - name: images
+        description: "Array of image URLs associated with the review."
+        data_type: array<string>
+
+      - name: asin
+        description: "ASIN of the product reviewed. Part of the composite PK. Foreign key to product metadata."
+        data_type: string
+        # tests:
+          # - relationships:
+          #     to: ref('int_product_meta_data_merged')
+          #     field: parent_asin
+      - name: parent_asin
+        description: "Parent ASIN associated with the review (confirm relationship/necessity)."
+        data_type: string
+
+      - name: user_id
+        description: "ID of the user submitting the review. Part of the composite PK."
+        data_type: string
+        tests:
+          - not_null
+
+      - name: review_date
+        description: "Date the review was submitted. Part of the composite PK."
+        data_type: date
+        tests:
+          - not_null
+
+      - name: helpful_vote
+        description: "Number of users finding the review helpful."
+        data_type: int64
+
+      - name: verified_purchase
+        description: "Flag indicating if the purchase was verified."
+        data_type: boolean
+
+      - name: details
+        description: "Details associated with the review (confirm relationship/necessity)."
+        data_type: string
+
+      - name: videos
+        description: "Array of video URLs associated with the review."
+        data_type: array<string>
+
+      - name: _data_source
+        description: "Originating source file or system for this review record."
+        data_type: string
+
+      - name: _load_time
+        description: "Timestamp when this review record was loaded."
+        data_type: timestamp
+

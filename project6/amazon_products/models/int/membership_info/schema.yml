@@ -1,0 +1,49 @@
+version: 2
+
+models:
+  - name: int_membership_info
+    description: "Intermediate model containing user membership details."
+    config:
+      contract:
+        enforced: true
+
+    constraints:
+      - type: primary_key
+        columns: [user_id]
+
+    columns:
+      - name: user_id
+        description: "Unique identifier for the user (PK and FK to int_user_info)."
+        data_type: string
+        tests:
+          - unique
+          - not_null
+          - relationships:
+              to: ref('int_user_info')
+              field: user_id
+
+      - name: membership_start_date
+        description: "Date the user's current membership started."
+        data_type: date
+
+      - name: membership_end_date
+        description: "Date the user's current membership is set to end (or ended)."
+        data_type: date
+
+      - name: subscription_plan
+        description: "The type of subscription plan (e.g., Monthly, Annual)."
+        data_type: string
+
+      - name: payment_information
+        description: "Details about the payment method (might need masking/tokenization)."
+        data_type: string
+      - name: renewal_status
+        description: "Status related to membership renewal (e.g., Next renewal date?)."
+        data_type: string
+      - name: _data_source
+        description: "Originating source file or system."
+        data_type: string
+      - name: _load_time
+        description: "Timestamp when the data was loaded into the raw layer."
+        data_type: timestamp
+
